@@ -1,5 +1,4 @@
 python_env
 
-# Everything in inputs/ and outputs/
-storage/inputs/*
-storage/outputs/*
+# Everything in storage
+storage/*
