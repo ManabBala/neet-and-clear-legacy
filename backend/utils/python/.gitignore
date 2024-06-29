@@ -1,5 +1,5 @@
 python_env
 
 # Everything in storage
-storage/inputs/
-storage/outputs/
+storage/inputs/*
+storage/outputs/*
