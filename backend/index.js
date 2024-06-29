@@ -1,7 +1,10 @@
 //Import express.js module and create its variable.
 import express, { json, response } from "express";
+import express, { json, response } from "express";
 const app = express();
 
+//Import PythonShell module.
+import { PythonShell } from "python-shell";
 //Import PythonShell module.
 import { PythonShell } from "python-shell";
 
