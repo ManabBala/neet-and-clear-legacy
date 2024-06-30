@@ -1,14 +1,51 @@
 //Import express.js module and create its variable.
 import express, { json, response } from "express";
+import multer from "multer";
+import { faker } from "@faker-js/faker";
+import path from "path";
+
 const app = express();
 
 //Import PythonShell module.
 import { PythonShell } from "python-shell";
 
-//Router to handle the incoming request.
-app.get("/", (req, res, next) => {
-	console.log("getting request");
+//Define storage for the uploaded files
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, "./backend/uploads");
+	},
+	filename: function (req, file, cb) {
+		cb(null, file.fieldname + "-" + faker.string.nanoid(10) + path.extname(file.originalname));
+	},
 });
+
+const upload = multer({ storage: storage });
+
+//Router to handle the incoming request.
+app.get("/", async function (req, res) {
+	const result = { msg: "hello", error: 0 };
+	res.json(result);
+});
+
+// file upload route
+app.post("/upload", upload.single("file"), function (req, res) {
+	const filePath = req.file.path;
+
+	console.log(` filePath: ${filePath}\n `);
+	res.json({ msg: "file uploaded", error: 0 });
+
+	// TODO: processing the uploaded file further
+});
+
+const processUploadedFile = (URI) => {
+	console.log("processing file: " + URI);
+
+	// TODO: logic to check if its a valid image
+
+	// TODO: cleanup the python OMR processing folders
+
+	// TODO: move image to the python OMR input folder
+};
 
 // python script will be executed here
 const runPythonScript = () => {
@@ -50,8 +87,6 @@ const runPythonScript = () => {
 		console.log("The exit code was: " + code);
 	});
 };
-
-runPythonScript();
 
 //Creates the server on default port 8000 and can be accessed through localhost:8000
 const port = 8000;
