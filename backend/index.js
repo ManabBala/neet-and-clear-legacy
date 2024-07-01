@@ -135,7 +135,7 @@ const runPythonScript = () => {
 		// run the python script
 		console.log("Running python script...");
 		let options = {
-			pythonPath: "backend/utils/python/python_env/Scripts/python.exe",
+			pythonPath: "backend/utils/python/OMRChecker/venv/Scripts/python.exe",
 			mode: "text",
 			pythonOptions: ["-u"], // get print results in real-time
 			scriptPath: "backend/utils/python/OMRChecker", //If you are having python_test.py script in same folder, then it's optional.
