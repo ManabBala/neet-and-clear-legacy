@@ -32,9 +32,8 @@ app.get("/", async function (req, res) {
 app.post("/upload", upload.single("file"), function (req, res) {
 	const filePath = req.file.path;
 	const fileName = req.file.filename;
-	console.log("File Name: " + fileName);
+	console.log(`File(${fileName}) uploaded to ${filePath}`);
 
-	console.log(`File Path: ${filePath}\n `);
 	res.json({ msg: "file uploaded", error: 0 });
 
 	// processing the uploaded file further
@@ -132,7 +131,6 @@ const processResults = (fileName, URI) => {
 // python script will be executed here
 const runPythonScript = () => {
 	return new Promise((resolve, reject) => {
-		// run the python script
 		console.log("Running python script...");
 		let options = {
 			pythonPath: "backend/utils/python/OMRChecker/venv/Scripts/python.exe",
